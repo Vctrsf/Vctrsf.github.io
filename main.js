@@ -78,8 +78,9 @@ function setLang(lang) {
 }
 
 // Detecta idioma do navegador
-var bl = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
-setLang(bl.startsWith('pt') ? 'pt' : 'en');
+var bl = (navigator.language || navigator.userLanguage || 'pt').toLowerCase();
+var detected = bl.startsWith('en') ? 'en' : 'pt';
+setLang(detected);
 
 // Botoes de idioma
 document.getElementById('btn-en').addEventListener('click', function() { setLang('en'); });
@@ -96,17 +97,4 @@ document.addEventListener('click', function() {
   cvMenu.classList.remove('open');
 });
 
-// Fade-up — visivel imediatamente + observer para elementos abaixo do fold
-document.querySelectorAll('.fade-up').forEach(function(el) {
-  el.classList.add('visible');
-});
-
-var obs = new IntersectionObserver(function(entries) {
-  entries.forEach(function(e) {
-    if (e.isIntersecting) e.target.classList.add('visible');
-  });
-}, { threshold: 0.01 });
-
-document.querySelectorAll('.fade-up').forEach(function(el) {
-  obs.observe(el);
-});
+// fim
