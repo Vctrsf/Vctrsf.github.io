@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Victor Fagundes – QA Analyst</title>
+  <title>Victor Fagundes - QA Analyst</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -25,7 +25,7 @@
     html { scroll-behavior: smooth; }
     body { font-family: var(--font-body); background: var(--bg); color: var(--body-text); overflow-x: hidden; }
 
-    /* ── NAV ── */
+    /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
@@ -41,51 +41,58 @@
 
     .nav-right { display: flex; align-items: center; gap: 0.75rem; }
 
-    /* Botão EN/PT */
-    .lang-toggle {
-      display: flex; align-items: center;
-      background: rgba(122,158,110,0.1);
-      border: 1.5px solid var(--border);
-      border-radius: 100px;
-      overflow: hidden;
-      height: 34px;
-    }
-    .lang-btn {
-      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em;
-      color: var(--muted); background: transparent; border: none;
-      padding: 0 0.85rem; height: 100%; cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-    }
-    .lang-btn.active {
-      background: var(--army); color: var(--white);
-      border-radius: 100px;
-    }
+    /* Lang toggle */
+    .lang-toggle { display: flex; align-items: center; background: rgba(122,158,110,0.1); border: 1.5px solid var(--border); border-radius: 100px; overflow: hidden; height: 34px; }
+    .lang-btn { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; color: var(--muted); background: transparent; border: none; padding: 0 0.85rem; height: 100%; cursor: pointer; transition: background 0.2s, color 0.2s; }
+    .lang-btn.active { background: var(--army); color: var(--white); border-radius: 100px; }
     .lang-btn:not(.active):hover { color: var(--forest); }
 
-    /* Google Translate widget oculto mas funcional */
-    .lang-extra {
-      position: relative;
-    }
-    .lang-extra-btn {
-      font-size: 0.72rem; font-weight: 500; color: var(--muted);
-      background: transparent; border: 1.5px solid var(--border);
-      border-radius: 100px; padding: 0 0.85rem; height: 34px;
-      cursor: pointer; display: flex; align-items: center; gap: 0.35rem;
-      transition: border-color 0.2s, color 0.2s;
+    /* CV dropdown */
+    .cv-dropdown { position: relative; }
+    .cv-trigger {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-weight: 500; color: var(--army);
+      border: 1.5px solid var(--sage); padding: 0 1rem; height: 34px;
+      border-radius: 100px; background: transparent; cursor: pointer;
+      letter-spacing: 0.04em; transition: background 0.2s, color 0.2s;
       white-space: nowrap;
     }
-    .lang-extra-btn:hover { border-color: var(--sage); color: var(--forest); }
-    .lang-extra-btn svg { width: 13px; height: 13px; fill: currentColor; }
+    .cv-trigger svg { width: 14px; height: 14px; fill: currentColor; }
+    .cv-trigger:hover { background: var(--sage); color: var(--white); }
 
-    /* Oculta o banner feio do Google Translate */
-    .goog-te-banner-frame, .skiptranslate { display: none !important; }
-    body { top: 0 !important; }
-    .goog-te-gadget { display: none !important; }
+    .cv-menu {
+      display: none;
+      position: absolute; top: calc(100% + 8px); right: 0;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(44,61,40,0.12);
+      min-width: 180px;
+      z-index: 200;
+    }
+    .cv-menu.open { display: block; }
+    .cv-menu-item {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.75rem 1.1rem;
+      font-size: 0.85rem; font-weight: 500; color: var(--forest);
+      text-decoration: none;
+      transition: background 0.15s;
+      border-bottom: 1px solid var(--border);
+    }
+    .cv-menu-item:last-child { border-bottom: none; }
+    .cv-menu-item:hover { background: var(--surface); }
+    .cv-menu-item .cv-lang-tag {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
+      background: var(--army); color: var(--white);
+      padding: 0.15rem 0.5rem; border-radius: 100px;
+    }
+    .cv-menu-item svg { width: 14px; height: 14px; fill: var(--sage); flex-shrink: 0; }
 
-    .nav-cta { font-size: 0.8rem; font-weight: 500; color: var(--forest); border: 1.5px solid var(--sage); padding: 0.45rem 1.1rem; border-radius: 100px; text-decoration: none; letter-spacing: 0.05em; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+    .nav-cta { font-size: 0.8rem; font-weight: 500; color: var(--forest); border: 1.5px solid var(--sage); padding: 0 1.1rem; height: 34px; display: inline-flex; align-items: center; border-radius: 100px; text-decoration: none; letter-spacing: 0.05em; transition: background 0.2s, color 0.2s, border-color 0.2s; white-space: nowrap; }
     .nav-cta:hover { background: var(--black); color: var(--white); border-color: var(--black); }
 
-    /* ── HERO ── */
+    /* HERO */
     #home { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 10rem 3rem 0; position: relative; overflow: hidden; }
     .hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 55% 45% at 85% 15%, rgba(122,158,110,0.18) 0%, transparent 65%), radial-gradient(ellipse 40% 35% at 8% 85%, rgba(61,92,53,0.10) 0%, transparent 60%); }
     .hero-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
@@ -95,13 +102,12 @@
     .hero-name { font-family: var(--font-display); font-size: clamp(3rem, 7vw, 5.5rem); line-height: 1.05; color: var(--forest); margin-bottom: 1.5rem; }
     .hero-desc { font-size: 1rem; font-weight: 400; line-height: 1.75; color: var(--body-text); max-width: 480px; margin-bottom: 2.5rem; }
     .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-bottom: 5rem; }
-
     .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; font-weight: 500; background: var(--black); color: var(--white); padding: 0.75rem 1.75rem; border-radius: 100px; text-decoration: none; letter-spacing: 0.03em; transition: background 0.2s, transform 0.15s; }
     .btn-primary:hover { background: var(--forest); transform: translateY(-1px); }
     .btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; font-weight: 400; color: var(--army); padding: 0.75rem 1.75rem; border-radius: 100px; border: 1.5px solid var(--sage); text-decoration: none; letter-spacing: 0.03em; transition: border-color 0.2s, color 0.2s; }
     .btn-secondary:hover { border-color: var(--army); color: var(--forest); }
 
-    /* ── CARROSSEL ── */
+    /* CARROSSEL */
     .carousel-wrapper { position: relative; z-index: 1; width: 100vw; padding: 2rem 0 3rem; background: var(--black); border-top: 2px solid rgba(122,158,110,0.3); }
     .carousel-label { font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--sage); text-align: center; margin-bottom: 1.5rem; }
     .carousel-track-outer { overflow: hidden; -webkit-mask: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%); mask: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%); }
@@ -111,13 +117,13 @@
     .carousel-logo { height: 36px; width: auto; object-fit: contain; opacity: 0.65; filter: grayscale(100%) brightness(2); transition: opacity 0.3s, filter 0.3s; user-select: none; }
     .carousel-logo:hover { opacity: 1; filter: grayscale(0%) brightness(1); }
 
-    /* ── SECTION COMUM ── */
+    /* SECTION */
     section { padding: 6rem 3rem; }
     .section-label { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sage); display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem; }
     .section-label::before { content: ''; display: inline-block; width: 20px; height: 1.5px; background: var(--sage); }
     .section-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); color: var(--forest); line-height: 1.15; margin-bottom: 3rem; }
 
-    /* ── ABOUT ── */
+    /* ABOUT */
     #about { background: var(--surface); }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; max-width: 1000px; }
     .about-text p { font-size: 1rem; font-weight: 400; line-height: 1.8; color: var(--body-text); margin-bottom: 1.25rem; }
@@ -131,7 +137,7 @@
     .skill-bar-fill { height: 100%; background: var(--sage); border-radius: 10px; transform-origin: left; animation: barIn 1s ease forwards; animation-delay: var(--delay, 0s); transform: scaleX(0); }
     @keyframes barIn { to { transform: scaleX(1); } }
 
-    /* ── EXPERIENCE ── */
+    /* EXPERIENCE */
     #experience { background: var(--bg); }
     .exp-card { max-width: 680px; border-left: 2px solid var(--sage); padding-left: 2rem; position: relative; }
     .exp-card + .exp-card { margin-top: 3rem; }
@@ -141,9 +147,9 @@
     .exp-company { font-size: 0.9rem; font-weight: 500; color: var(--army); margin-bottom: 1.25rem; }
     .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
     .exp-bullets li { font-size: 0.9rem; font-weight: 400; line-height: 1.65; color: var(--body-text); padding-left: 1rem; position: relative; }
-    .exp-bullets li::before { content: '–'; position: absolute; left: 0; color: var(--sage); }
+    .exp-bullets li::before { content: '-'; position: absolute; left: 0; color: var(--sage); }
 
-    /* ── PROJECTS ── */
+    /* PROJECTS */
     #projects { background: var(--surface); }
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
     .project-card { background: rgba(255,255,255,0.7); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; transition: transform 0.2s, box-shadow 0.2s; position: relative; overflow: hidden; }
@@ -158,7 +164,7 @@
     .project-desc { font-size: 0.85rem; font-weight: 400; line-height: 1.65; color: var(--body-text); }
     .project-coming { margin-top: 1rem; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sage); }
 
-    /* ── CONTACT ── */
+    /* CONTACT */
     #contact { background: var(--black); text-align: center; }
     #contact .section-label { justify-content: center; color: var(--sage); }
     #contact .section-label::before { background: var(--sage); }
@@ -169,17 +175,17 @@
     .contact-link:hover { border-color: var(--sage); color: var(--white); background: rgba(122,158,110,0.12); }
     .contact-link svg { width: 16px; height: 16px; fill: currentColor; }
 
-    /* ── FOOTER ── */
+    /* FOOTER */
     footer { background: var(--black); border-top: 1px solid rgba(122,158,110,0.2); padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; }
     footer p { font-size: 0.78rem; color: var(--sage); letter-spacing: 0.04em; }
     footer a { color: #C8D8C4; text-decoration: none; }
     footer a:hover { color: var(--white); }
 
-    /* ── FADE IN ── */
+    /* FADE IN */
     .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-    /* ── MOBILE ── */
+    /* MOBILE */
     @media (max-width: 700px) {
       nav { padding: 1rem 1.5rem; flex-wrap: wrap; gap: 0.75rem; }
       .nav-links { display: none; }
@@ -193,9 +199,6 @@
 </head>
 <body>
 
-  <!-- Google Translate element oculto -->
-  <div id="google_translate_element" style="display:none"></div>
-
   <!-- NAV -->
   <nav>
     <a class="nav-logo" href="#home">Victor Fagundes</a>
@@ -206,18 +209,34 @@
       <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
     </ul>
     <div class="nav-right">
+
       <!-- Toggle EN / PT -->
       <div class="lang-toggle">
-        <button class="lang-btn active" onclick="setLang('en')">EN</button>
-        <button class="lang-btn" onclick="setLang('pt')">PT</button>
+        <button class="lang-btn active" id="btn-en">EN</button>
+        <button class="lang-btn" id="btn-pt">PT</button>
       </div>
-      <!-- Outros idiomas via Google Translate -->
-      <div class="lang-extra">
-        <button class="lang-extra-btn" onclick="toggleGT()" title="Other languages">
-          <svg viewBox="0 0 24 24"><path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg>
-          More languages
+
+      <!-- CV Download dropdown -->
+      <div class="cv-dropdown">
+        <button class="cv-trigger" id="cv-trigger">
+          <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          Download CV
+          <svg viewBox="0 0 24 24" style="width:12px;height:12px;margin-left:2px"><path d="M7 10l5 5 5-5z"/></svg>
         </button>
+        <div class="cv-menu" id="cv-menu">
+          <a class="cv-menu-item" href="Victor_Fagundes_QA_EN.pdf" download>
+            <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            <span>English</span>
+            <span class="cv-lang-tag">EN</span>
+          </a>
+          <a class="cv-menu-item" href="Victor_Fagundes_QA_PT.pdf" download>
+            <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            <span id="cv-pt-label">Português</span>
+            <span class="cv-lang-tag">PT</span>
+          </a>
+        </div>
       </div>
+
       <a class="nav-cta" href="mailto:btf.victorsf0206@gmail.com" data-i18n="nav.cta">Get in touch ↗</a>
     </div>
   </nav>
@@ -307,7 +326,7 @@
     <h2 class="section-title" data-i18n="exp.title">Where I've worked</h2>
 
     <div class="exp-card fade-up">
-      <div class="exp-meta">Dec 2024 – Aug 2025 &nbsp;·&nbsp; Santos, SP – Hybrid</div>
+      <div class="exp-meta">Dec 2024 – Aug 2025 &nbsp;·&nbsp; Santos, SP – <span data-i18n="work.hybrid">Hybrid</span></div>
       <div class="exp-role" data-i18n="exp1.role">QA Analyst Jr</div>
       <div class="exp-company">Mosten</div>
       <ul class="exp-bullets">
@@ -321,7 +340,7 @@
     </div>
 
     <div class="exp-card fade-up">
-      <div class="exp-meta">Jan 2024 – Dec 2024 &nbsp;·&nbsp; Santos, SP – Hybrid</div>
+      <div class="exp-meta">Jan 2024 – Dec 2024 &nbsp;·&nbsp; Santos, SP – <span data-i18n="work.hybrid">Hybrid</span></div>
       <div class="exp-role" data-i18n="exp2.role">QA Software Intern</div>
       <div class="exp-company">Mosten</div>
       <ul class="exp-bullets">
@@ -386,129 +405,112 @@
   <!-- FOOTER -->
   <footer>
     <p>© Victor Fagundes, 2026</p>
-    <p>Built with HTML & CSS · <a href="https://github.com/Vctrsf" target="_blank">github.com/Vctrsf</a></p>
+    <p>Built with HTML &amp; CSS · <a href="https://github.com/Vctrsf" target="_blank">github.com/Vctrsf</a></p>
   </footer>
 
-  <!-- Google Translate API -->
-  <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'en',
-        includedLanguages: 'af,sq,am,ar,hy,az,eu,be,bn,bs,bg,ca,ceb,zh-CN,zh-TW,co,hr,cs,da,nl,eo,et,fi,fr,fy,gl,ka,de,el,gu,ht,ha,haw,hi,hmn,hu,is,ig,id,ga,it,ja,jw,kn,kk,km,ko,ku,ky,lo,la,lv,lt,lb,mk,mg,ms,ml,mt,mi,mr,mn,my,ne,no,ny,or,ps,fa,pl,pt,pa,ro,ru,sm,gd,sr,st,sn,sd,si,sk,sl,so,es,su,sw,sv,tl,tg,ta,tt,te,th,tr,tk,uk,ur,ug,uz,vi,cy,xh,yi,yo,zu',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-        autoDisplay: false
-      }, 'google_translate_element');
-    }
-
-    function toggleGT() {
-      var el = document.getElementById('google_translate_element');
-      var select = el.querySelector('select.goog-te-combo');
-      if (select) {
-        select.style.display = select.style.display === 'none' ? 'block' : 'none';
-        select.style.position = 'fixed';
-        select.style.top = '70px';
-        select.style.right = '20px';
-        select.style.zIndex = '9999';
-        select.style.padding = '8px 12px';
-        select.style.borderRadius = '8px';
-        select.style.border = '1.5px solid #7A9E6E';
-        select.style.background = '#F2F5F0';
-        select.style.color = '#2C3D28';
-        select.style.fontSize = '0.85rem';
-        select.style.boxShadow = '0 4px 16px rgba(0,0,0,0.12)';
-      }
-    }
-  </script>
-  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-  <!-- i18n EN / PT -->
   <script>
     var translations = {
       en: {
-        'nav.about': 'About', 'nav.experience': 'Experience', 'nav.projects': 'Projects',
-        'nav.contact': 'Contact', 'nav.cta': 'Get in touch ↗',
-        'hero.title': 'QA Analyst',
-        'hero.desc': 'Quality Assurance professional with 2+ years of experience ensuring software reliability through structured testing, automation and process improvement.',
-        'hero.cta': 'See my work',
-        'carousel.label': 'Companies I helped',
-        'about.label': 'About me', 'about.title1': 'Quality is', 'about.title2': 'the feature.',
-        'about.p1': "I'm a QA Analyst with 2+ years of experience in the software development lifecycle, working with manual testing, test automation and API validation across web and mobile applications.",
-        'about.p2': 'At Mosten, I progressed from intern to analyst, building E2E and API test suites with Cypress and Cucumber, integrating them into CI/CD pipelines, and collaborating closely with dev teams in Scrum environments.',
-        'skills.testing': 'Testing', 'skills.manual': 'Manual Testing', 'skills.api': 'API Testing',
-        'skills.automation': 'Test Automation', 'skills.tools': 'Tools',
-        'exp.label': 'Experience', 'exp.title': "Where I've worked",
-        'exp1.role': 'QA Analyst Jr',
-        'exp1.b1': 'Authored detailed test plans and cases from requirements and user stories, ensuring full coverage of functional and non-functional scenarios for web and mobile applications.',
-        'exp1.b2': 'Executed functional, regression and exploratory manual tests, documenting bugs in JIRA and Azure DevOps with reproduction steps, evidence and follow-up until resolution.',
-        'exp1.b3': 'Automated E2E and API tests with Cypress, JavaScript and Cucumber, applying BDD with Gherkin and integrating execution into CI/CD pipelines on Azure DevOps.',
-        'exp1.b4': 'Tested APIs with Insomnia and Postman, validating request/response, error handling and system integrations, using SQL for data queries and validation.',
-        'exp1.b5': 'Participated actively in Scrum ceremonies — refinements, plannings, reviews and retrospectives — contributing with acceptance criteria and risk assessment before sprints.',
-        'exp1.b6': 'Collaborated with dev teams using Chrome DevTools for technical inspection and UX improvement evidence.',
-        'exp2.role': 'QA Software Intern',
-        'exp2.b1': 'Executed exploratory and manual tests on web and mobile applications (Android and iOS), ensuring functional coverage and identification of UI/UX inconsistencies during the SDLC.',
-        'exp2.b2': 'Authored test matrices and test books, documenting results and collaborating on expanding regression suites with Cypress, Selenium and Git/GitHub.',
-        'exp2.b3': 'Supported the shift-left approach by participating in requirements and acceptance criteria reviews with business analysts and tech leads before development started.',
-        'exp2.b4': 'Optimized manual test flows and improved communication with proactive bug reporting, contributing to more predictable sprints and a lower defect rate.',
-        'proj.label': 'Projects', 'proj.title': 'My work', 'proj.soon': 'Coming soon',
-        'proj1.title': 'E2E Test Suite', 'proj1.desc': 'Automated end-to-end test suite covering critical user flows using Cypress.',
-        'proj2.title': 'API Test Collection', 'proj2.desc': 'Postman collection with automated assertions for a RESTful API project.',
-        'proj3.title': 'Test Plan Template', 'proj3.desc': 'Structured test plan and case documentation template for agile teams.',
-        'contact.label': 'Contact', 'contact.title': "Let's connect", 'contact.sub': 'Open to new opportunities and collaborations.'
+        'nav.about':'About','nav.experience':'Experience','nav.projects':'Projects','nav.contact':'Contact','nav.cta':'Get in touch ↗',
+        'hero.title':'QA Analyst',
+        'hero.desc':'Quality Assurance professional with 2+ years of experience ensuring software reliability through structured testing, automation and process improvement.',
+        'hero.cta':'See my work','carousel.label':'Companies I helped',
+        'about.label':'About me','about.title1':'Quality is','about.title2':'the feature.',
+        'about.p1':"I'm a QA Analyst with 2+ years of experience in the software development lifecycle, working with manual testing, test automation and API validation across web and mobile applications.",
+        'about.p2':'At Mosten, I progressed from intern to analyst, building E2E and API test suites with Cypress and Cucumber, integrating them into CI/CD pipelines, and collaborating closely with dev teams in Scrum environments.',
+        'skills.testing':'Testing','skills.manual':'Manual Testing','skills.api':'API Testing','skills.automation':'Test Automation','skills.tools':'Tools',
+        'exp.label':'Experience','exp.title':"Where I've worked",'work.hybrid':'Hybrid',
+        'exp1.role':'QA Analyst Jr',
+        'exp1.b1':'Authored detailed test plans and cases from requirements and user stories, ensuring full coverage of functional and non-functional scenarios for web and mobile applications.',
+        'exp1.b2':'Executed functional, regression and exploratory manual tests, documenting bugs in JIRA and Azure DevOps with reproduction steps, evidence and follow-up until resolution.',
+        'exp1.b3':'Automated E2E and API tests with Cypress, JavaScript and Cucumber, applying BDD with Gherkin and integrating execution into CI/CD pipelines on Azure DevOps.',
+        'exp1.b4':'Tested APIs with Insomnia and Postman, validating request/response, error handling and system integrations, using SQL for data queries and validation.',
+        'exp1.b5':'Participated actively in Scrum ceremonies - refinements, plannings, reviews and retrospectives - contributing with acceptance criteria and risk assessment before sprints.',
+        'exp1.b6':'Collaborated with dev teams using Chrome DevTools for technical inspection and UX improvement evidence.',
+        'exp2.role':'QA Software Intern',
+        'exp2.b1':'Executed exploratory and manual tests on web and mobile applications (Android and iOS), ensuring functional coverage and identification of UI/UX inconsistencies during the SDLC.',
+        'exp2.b2':'Authored test matrices and test books, documenting results and collaborating on expanding regression suites with Cypress, Selenium and Git/GitHub.',
+        'exp2.b3':'Supported the shift-left approach by participating in requirements and acceptance criteria reviews with business analysts and tech leads before development started.',
+        'exp2.b4':'Optimized manual test flows and improved communication with proactive bug reporting, contributing to more predictable sprints and a lower defect rate.',
+        'proj.label':'Projects','proj.title':'My work','proj.soon':'Coming soon',
+        'proj1.title':'E2E Test Suite','proj1.desc':'Automated end-to-end test suite covering critical user flows using Cypress.',
+        'proj2.title':'API Test Collection','proj2.desc':'Postman collection with automated assertions for a RESTful API project.',
+        'proj3.title':'Test Plan Template','proj3.desc':'Structured test plan and case documentation template for agile teams.',
+        'contact.label':'Contact','contact.title':"Let's connect",'contact.sub':'Open to new opportunities and collaborations.'
       },
       pt: {
-        'nav.about': 'Sobre', 'nav.experience': 'Experiência', 'nav.projects': 'Projetos',
-        'nav.contact': 'Contato', 'nav.cta': 'Entre em contato ↗',
-        'hero.title': 'Analista de QA',
-        'hero.desc': 'Profissional de Garantia de Qualidade com mais de 2 anos de experiência garantindo a confiabilidade de software por meio de testes estruturados, automação e melhoria de processos.',
-        'hero.cta': 'Ver meu trabalho',
-        'carousel.label': 'Empresas que ajudei',
-        'about.label': 'Sobre mim', 'about.title1': 'Qualidade é', 'about.title2': 'o diferencial.',
-        'about.p1': 'Sou um Analista de QA com mais de 2 anos de experiência no ciclo de vida de desenvolvimento de software, atuando em testes manuais, automação e validação de APIs em aplicações web e mobile.',
-        'about.p2': 'Na Mosten, evoluí de estagiário a analista, construindo suítes de testes E2E e de API com Cypress e Cucumber, integrando execuções em pipelines CI/CD e colaborando com equipes de desenvolvimento em ambientes Scrum.',
-        'skills.testing': 'Testes', 'skills.manual': 'Testes Manuais', 'skills.api': 'Testes de API',
-        'skills.automation': 'Automação de Testes', 'skills.tools': 'Ferramentas',
-        'exp.label': 'Experiência', 'exp.title': 'Onde trabalhei',
-        'exp1.role': 'Analista de QA Jr',
-        'exp1.b1': 'Elaboração de planos e casos de teste detalhados a partir de requisitos e histórias de usuário, garantindo cobertura completa de cenários funcionais e não funcionais para aplicações web e mobile.',
-        'exp1.b2': 'Execução de testes manuais funcionais, regressivos e exploratórios, com documentação de bugs no JIRA e Azure DevOps com passos de reprodução, evidências e acompanhamento até a resolução.',
-        'exp1.b3': 'Automação de testes E2E e de API com Cypress, JavaScript e Cucumber, aplicando BDD com Gherkin e integrando execução em pipelines CI/CD no Azure DevOps.',
-        'exp1.b4': 'Testes de API com Insomnia e Postman, validando request/response, tratamento de erros e integrações entre sistemas, com uso de SQL para consulta e validação de dados.',
-        'exp1.b5': 'Participação ativa nas cerimônias ágeis Scrum — refinamentos, plannings, reviews e retrospectivas — contribuindo com critérios de aceite e levantamento de riscos antes das sprints.',
-        'exp1.b6': 'Colaboração com times de desenvolvimento utilizando Chrome DevTools para inspeção técnica e geração de evidências de melhorias de UX.',
-        'exp2.role': 'Estagiário de QA de Software',
-        'exp2.b1': 'Execução de testes exploratórios e manuais em aplicações web e mobile (Android e iOS), garantindo cobertura funcional e identificação de inconsistências de UI/UX durante o SDLC.',
-        'exp2.b2': 'Elaboração de matrizes e cadernos de teste, documentando resultados e colaborando na expansão de suítes de regressão com Cypress, Selenium e Git/GitHub.',
-        'exp2.b3': 'Apoio à abordagem shift-left participando de revisões de requisitos e critérios de aceite junto a analistas de negócio e líderes técnicos antes do início do desenvolvimento.',
-        'exp2.b4': 'Otimização de fluxos de teste manual e melhoria da comunicação, com reporting proativo de problemas, contribuindo para sprints mais previsíveis e menor índice de defeitos.',
-        'proj.label': 'Projetos', 'proj.title': 'Meu trabalho', 'proj.soon': 'Em breve',
-        'proj1.title': 'Suíte E2E de Testes', 'proj1.desc': 'Suíte de testes end-to-end automatizados cobrindo fluxos críticos de usuário com Cypress.',
-        'proj2.title': 'Coleção de Testes de API', 'proj2.desc': 'Coleção Postman com asserções automatizadas para um projeto de API RESTful.',
-        'proj3.title': 'Template de Plano de Testes', 'proj3.desc': 'Template estruturado de plano e casos de teste para equipes ágeis.',
-        'contact.label': 'Contato', 'contact.title': 'Vamos nos conectar', 'contact.sub': 'Aberto a novas oportunidades e colaborações.'
+        'nav.about':'Sobre','nav.experience':'Experiencia','nav.projects':'Projetos','nav.contact':'Contato','nav.cta':'Entre em contato ↗',
+        'hero.title':'Analista de QA',
+        'hero.desc':'Profissional de Garantia de Qualidade com mais de 2 anos de experiencia garantindo a confiabilidade de software por meio de testes estruturados, automacao e melhoria de processos.',
+        'hero.cta':'Ver meu trabalho','carousel.label':'Empresas que ajudei',
+        'about.label':'Sobre mim','about.title1':'Qualidade e','about.title2':'o diferencial.',
+        'about.p1':'Sou um Analista de QA com mais de 2 anos de experiencia no ciclo de vida de desenvolvimento de software, atuando em testes manuais, automacao e validacao de APIs em aplicacoes web e mobile.',
+        'about.p2':'Na Mosten, evolui de estagiario a analista, construindo suites de testes E2E e de API com Cypress e Cucumber, integrando execucoes em pipelines CI/CD e colaborando com equipes de desenvolvimento em ambientes Scrum.',
+        'skills.testing':'Testes','skills.manual':'Testes Manuais','skills.api':'Testes de API','skills.automation':'Automacao de Testes','skills.tools':'Ferramentas',
+        'exp.label':'Experiencia','exp.title':'Onde trabalhei','work.hybrid':'Hibrido',
+        'exp1.role':'Analista de QA Jr',
+        'exp1.b1':'Elaboracao de planos e casos de teste detalhados a partir de requisitos e historias de usuario, garantindo cobertura completa de cenarios funcionais e nao funcionais para aplicacoes web e mobile.',
+        'exp1.b2':'Execucao de testes manuais funcionais, regressivos e exploratorios, com documentacao de bugs no JIRA e Azure DevOps com passos de reproducao, evidencias e acompanhamento ate a resolucao.',
+        'exp1.b3':'Automacao de testes E2E e de API com Cypress, JavaScript e Cucumber, aplicando BDD com Gherkin e integrando execucao em pipelines CI/CD no Azure DevOps.',
+        'exp1.b4':'Testes de API com Insomnia e Postman, validando request/response, tratamento de erros e integracoes entre sistemas, com uso de SQL para consulta e validacao de dados.',
+        'exp1.b5':'Participacao ativa nas cerimonias ageis Scrum - refinamentos, plannings, reviews e retrospectivas - contribuindo com criterios de aceite e levantamento de riscos antes das sprints.',
+        'exp1.b6':'Colaboracao com times de desenvolvimento utilizando Chrome DevTools para inspecao tecnica e geracao de evidencias de melhorias de UX.',
+        'exp2.role':'Estagiario de QA de Software',
+        'exp2.b1':'Execucao de testes exploratorios e manuais em aplicacoes web e mobile (Android e iOS), garantindo cobertura funcional e identificacao de inconsistencias de UI/UX durante o SDLC.',
+        'exp2.b2':'Elaboracao de matrizes e cadernos de teste, documentando resultados e colaborando na expansao de suites de regressao com Cypress, Selenium e Git/GitHub.',
+        'exp2.b3':'Apoio a abordagem shift-left participando de revisoes de requisitos e criterios de aceite junto a analistas de negocio e lideres tecnicos antes do inicio do desenvolvimento.',
+        'exp2.b4':'Otimizacao de fluxos de teste manual e melhoria da comunicacao, com reporting proativo de problemas, contribuindo para sprints mais previsiveis e menor indice de defeitos.',
+        'proj.label':'Projetos','proj.title':'Meu trabalho','proj.soon':'Em breve',
+        'proj1.title':'Suite E2E de Testes','proj1.desc':'Suite de testes end-to-end automatizados cobrindo fluxos criticos de usuario com Cypress.',
+        'proj2.title':'Colecao de Testes de API','proj2.desc':'Colecao Postman com assercoes automatizadas para um projeto de API RESTful.',
+        'proj3.title':'Template de Plano de Testes','proj3.desc':'Template estruturado de plano e casos de teste para equipes ageis.',
+        'contact.label':'Contato','contact.title':'Vamos nos conectar','contact.sub':'Aberto a novas oportunidades e colaboracoes.'
       }
     };
 
     var currentLang = 'en';
 
-    function setLang(lang) {
-      currentLang = lang;
+    function applyLang(lang) {
+      var t = translations[lang] || translations['en'];
       document.documentElement.lang = lang;
-
-      // Atualiza botões
-      document.querySelectorAll('.lang-btn').forEach(function(btn) {
-        btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
-      });
-
-      // Aplica traduções
       document.querySelectorAll('[data-i18n]').forEach(function(el) {
         var key = el.getAttribute('data-i18n');
-        if (translations[lang] && translations[lang][key]) {
-          el.textContent = translations[lang][key];
-        }
+        if (t[key]) el.textContent = t[key];
       });
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.getElementById('btn-pt').classList.toggle('active', lang === 'pt');
+      // Label do CV em PT muda conforme idioma do site
+      var cvPtLabel = document.getElementById('cv-pt-label');
+      if (cvPtLabel) cvPtLabel.textContent = lang === 'pt' ? 'Português' : 'Portuguese';
     }
 
-    // Fade-up observer
+    function setLang(lang) {
+      currentLang = lang;
+      applyLang(lang);
+    }
+
+    // Detecta idioma do navegador
+    (function() {
+      var bl = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+      setLang(bl.startsWith('pt') ? 'pt' : 'en');
+    })();
+
+    // Eventos dos botões de idioma
+    document.getElementById('btn-en').addEventListener('click', function() { setLang('en'); });
+    document.getElementById('btn-pt').addEventListener('click', function() { setLang('pt'); });
+
+    // Dropdown CV
+    var cvTrigger = document.getElementById('cv-trigger');
+    var cvMenu = document.getElementById('cv-menu');
+    cvTrigger.addEventListener('click', function(e) {
+      e.stopPropagation();
+      cvMenu.classList.toggle('open');
+    });
+    document.addEventListener('click', function() {
+      cvMenu.classList.remove('open');
+    });
+
+    // Fade-up
     setTimeout(function() {
       document.querySelectorAll('.fade-up').forEach(function(el) { el.classList.add('visible'); });
     }, 200);
